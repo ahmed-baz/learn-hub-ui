@@ -12,7 +12,6 @@ import {ApiConfiguration} from '../api-configuration';
 import {StrictHttpResponse} from '../strict-http-response';
 
 import {AppResponse} from '../models/app-response';
-import {Course} from '../models/course';
 import {createCourse, CreateCourse$Params} from '../fn/courses/create-course';
 import {deleteCourse, DeleteCourse$Params} from '../fn/courses/delete-course';
 import {exportCourseSchedule, ExportCourseSchedule$Params} from '../fn/courses/export-course-schedule';
@@ -59,7 +58,7 @@ export class CoursesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findCourse$Response(params: FindCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+  findCourse$Response(params: FindCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
     return findCourse(this.http, this.rootUrl, params, context);
   }
 
@@ -73,9 +72,9 @@ export class CoursesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findCourse(params: FindCourse$Params, context?: HttpContext): Observable<Course> {
+  findCourse(params: FindCourse$Params, context?: HttpContext): Observable<AppResponse> {
     return this.findCourse$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Course>): Course => r.body)
+      map((r: StrictHttpResponse<AppResponse>): AppResponse => r.body)
     );
   }
 
@@ -89,7 +88,7 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateCourse$Response(params: UpdateCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+  updateCourse$Response(params: UpdateCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
     return updateCourse(this.http, this.rootUrl, params, context);
   }
 
@@ -103,9 +102,9 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  updateCourse(params: UpdateCourse$Params, context?: HttpContext): Observable<Course> {
+  updateCourse(params: UpdateCourse$Params, context?: HttpContext): Observable<AppResponse> {
     return this.updateCourse$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Course>): Course => r.body)
+      map((r: StrictHttpResponse<AppResponse>): AppResponse => r.body)
     );
   }
 
@@ -149,7 +148,7 @@ export class CoursesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getCourses$Response(params?: GetCourses$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+  getCourses$Response(params?: GetCourses$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
     return getCourses(this.http, this.rootUrl, params, context);
   }
 
@@ -163,9 +162,9 @@ export class CoursesService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getCourses(params?: GetCourses$Params, context?: HttpContext): Observable<Course> {
+  getCourses(params?: GetCourses$Params, context?: HttpContext): Observable<AppResponse> {
     return this.getCourses$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Course>): Course => r.body)
+      map((r: StrictHttpResponse<AppResponse>): AppResponse => r.body)
     );
   }
 
@@ -179,7 +178,7 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createCourse$Response(params: CreateCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+  createCourse$Response(params: CreateCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
     return createCourse(this.http, this.rootUrl, params, context);
   }
 
@@ -193,9 +192,9 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createCourse(params: CreateCourse$Params, context?: HttpContext): Observable<Course> {
+  createCourse(params: CreateCourse$Params, context?: HttpContext): Observable<AppResponse> {
     return this.createCourse$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Course>): Course => r.body)
+      map((r: StrictHttpResponse<AppResponse>): AppResponse => r.body)
     );
   }
 
@@ -239,7 +238,7 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  registerCourse$Response(params: RegisterCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+  registerCourse$Response(params: RegisterCourse$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
     return registerCourse(this.http, this.rootUrl, params, context);
   }
 
@@ -253,9 +252,9 @@ export class CoursesService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  registerCourse(params: RegisterCourse$Params, context?: HttpContext): Observable<Course> {
+  registerCourse(params: RegisterCourse$Params, context?: HttpContext): Observable<AppResponse> {
     return this.registerCourse$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Course>): Course => r.body)
+      map((r: StrictHttpResponse<AppResponse>): AppResponse => r.body)
     );
   }
 

@@ -8,27 +8,27 @@ import {filter, map} from 'rxjs/operators';
 import {StrictHttpResponse} from '../../strict-http-response';
 import {RequestBuilder} from '../../request-builder';
 
+import {AppResponse} from '../../models/app-response';
 import {UserRegisterRequest} from '../../models/user-register-request';
-import {UserRegisterResponse} from '../../models/user-register-response';
 
 export interface Register$Params {
-  body: UserRegisterRequest
+    body: UserRegisterRequest
 }
 
-export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<UserRegisterResponse>> {
-  const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
-  if (params) {
-    rb.body(params.body, 'application/json');
-  }
+export function register(http: HttpClient, rootUrl: string, params: Register$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
+    const rb = new RequestBuilder(rootUrl, register.PATH, 'post');
+    if (params) {
+        rb.body(params.body, 'application/json');
+    }
 
-  return http.request(
-    rb.build({responseType: 'json', accept: 'application/json', context})
-  ).pipe(
-    filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
-    map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<UserRegisterResponse>;
-    })
-  );
+    return http.request(
+        rb.build({responseType: 'json', accept: 'application/json', context})
+    ).pipe(
+        filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+            return r as StrictHttpResponse<AppResponse>;
+        })
+    );
 }
 
 register.PATH = '/api/v1/auth/register';

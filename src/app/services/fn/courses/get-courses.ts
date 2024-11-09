@@ -8,12 +8,12 @@ import {filter, map} from 'rxjs/operators';
 import {StrictHttpResponse} from '../../strict-http-response';
 import {RequestBuilder} from '../../request-builder';
 
-import {Course} from '../../models/course';
+import {AppResponse} from '../../models/app-response';
 
 export interface GetCourses$Params {
 }
 
-export function getCourses(http: HttpClient, rootUrl: string, params?: GetCourses$Params, context?: HttpContext): Observable<StrictHttpResponse<Course>> {
+export function getCourses(http: HttpClient, rootUrl: string, params?: GetCourses$Params, context?: HttpContext): Observable<StrictHttpResponse<AppResponse>> {
   const rb = new RequestBuilder(rootUrl, getCourses.PATH, 'get');
   if (params) {
   }
@@ -23,7 +23,7 @@ export function getCourses(http: HttpClient, rootUrl: string, params?: GetCourse
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Course>;
+      return r as StrictHttpResponse<AppResponse>;
     })
   );
 }
