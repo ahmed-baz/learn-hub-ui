@@ -33,7 +33,7 @@ export class LoginComponent {
             // save the token
             this.loginResponse = res.data as LoginResponse;
             this.tokenService.setToken(this.loginResponse.accessToken);
-            //this.router.navigate(['/courses']);
+            this.router.navigate(['/courses']);
           } else {
             this.errorsMessages = this.getAllValidationErrors(res);
           }
