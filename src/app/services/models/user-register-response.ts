@@ -8,5 +8,5 @@ export interface UserRegisterResponse {
   firstName?: string;
   id?: number;
   lastName?: string;
-  role?: 'ADMIN' | 'INSTRUCTOR' | 'STUDENT';
+  role?: string;
 }
