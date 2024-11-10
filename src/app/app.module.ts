@@ -8,19 +8,23 @@ import { LoginComponent } from './pages/login/login.component';
 import {FormsModule} from '@angular/forms';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CourseComponent } from './pages/course/course.component';
+import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
+import {CodeInputModule} from 'angular-code-input';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    CourseComponent
+    CourseComponent,
+    ActivateAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CodeInputModule
   ],
   providers: [
     provideClientHydration(),
