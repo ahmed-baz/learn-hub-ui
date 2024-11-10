@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/services/authentication.service';
 import {LoginResponse} from '../../services/models/login-response';
 import {TokenService} from '../../services/token/token.service';
+import {AppResponse} from '../../services/models/app-response';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import {TokenService} from '../../services/token/token.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginRequest: LoginRequest = {email: 'ali@tesla.com', password: 'P@ssw0rd'};
+  loginRequest: LoginRequest = {email: '', password: ''};
   loginResponse: LoginResponse = {id: 0, email: '', role: '', accessToken: ''};
   errorsMessages: Array<string> = [];
 
@@ -34,8 +35,7 @@ export class LoginComponent {
             this.tokenService.setToken(this.loginResponse.accessToken);
             //this.router.navigate(['/courses']);
           } else {
-            //TODO map errors
-            var validationErrors = res.validationErrors;
+            this.errorsMessages = this.getAllValidationErrors(res);
           }
         },
         error: (error) => {
@@ -48,4 +48,13 @@ export class LoginComponent {
   register() {
     this.router.navigate(['/register']);
   }
+
+  getAllValidationErrors(response: AppResponse): string[] {
+    return Array.from((this.convertToMap(response.validationErrors)).values());
+  }
+
+  convertToMap(obj: { [key: string]: string }): Map<string, string> {
+    return new Map(Object.entries(obj));
+  }
+
 }

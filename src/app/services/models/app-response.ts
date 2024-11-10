@@ -7,5 +7,5 @@ export interface AppResponse {
   data?: {};
   responseDate: string;
   statusCode: number;
-  validationErrors: Map<string, string>;
+  validationErrors: { [key: string]: string };
 }
