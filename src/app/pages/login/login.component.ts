@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import {LoginRequest} from '../../services/models/login-request';
 import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/services/authentication.service';
 import {LoginResponse} from '../../services/models/login-response';
 import {TokenService} from '../../services/token/token.service';
-import {AppResponse} from '../../services/models/app-response';
+import {AuthService} from '../../services/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private tokenService: TokenService,
   ) {
   }
@@ -26,16 +25,19 @@ export class LoginComponent {
   login() {
     this.errorsMessages = [];
     this.authService
-      .login({body: this.loginRequest})
+      .login(this.loginRequest)
       .subscribe({
         next: (res) => {
           if (200 == res.statusCode) {
             // save the token
             this.loginResponse = res.data as LoginResponse;
-            this.tokenService.setToken(this.loginResponse.accessToken);
+            let accessToken = this.loginResponse.accessToken as string;
+            this.tokenService.setToken(accessToken);
             this.router.navigate(['/courses']);
           } else {
-            this.errorsMessages = this.getAllValidationErrors(res);
+            res.validationErrors.forEach((key, value) => {
+              this.errorsMessages.push(value);
+            })
           }
         },
         error: (error) => {
@@ -49,12 +51,15 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  getAllValidationErrors(response: AppResponse): string[] {
-    return Array.from((this.convertToMap(response.validationErrors)).values());
-  }
+  /*
 
-  convertToMap(obj: { [key: string]: string }): Map<string, string> {
-    return new Map(Object.entries(obj));
-  }
+    getAllValidationErrors(response: AppResponse<LoginResponse>): string[] {
+      return Array.from((this.convertToMap(response.validationErrors)).values());
+    }
 
+    convertToMap(obj: { [key: string]: string }): Map<string, string> {
+      return new Map(Object.entries(obj));
+    }
+
+   */
 }

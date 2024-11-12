@@ -2,8 +2,7 @@ import {Component} from '@angular/core';
 import {UserRegisterRequest} from '../../services/models/user-register-request';
 import {UserRegisterResponse} from '../../services/models/user-register-response';
 import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/services/authentication.service';
-import {AppResponse} from '../../services/models/app-response';
+import {AuthService} from '../../services/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -18,14 +17,14 @@ export class RegistrationComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
+    private authService: AuthService,
   ) {
   }
 
   register() {
     this.errorsMessages = []
     this.authService
-      .register({body: this.registerRequest})
+      .register(this.registerRequest)
       .subscribe(
         {
           next: (res) => {
@@ -34,7 +33,9 @@ export class RegistrationComponent {
               this.registerResponse = res.data as UserRegisterResponse;
               this.router.navigate(['/activate-account']);
             } else {
-              this.errorsMessages = this.getAllValidationErrors(res);
+              for (let msg of res.validationErrors.values()) {
+                this.errorsMessages.push(msg);
+              }
             }
           },
           error: (error) => {
@@ -43,14 +44,6 @@ export class RegistrationComponent {
           }
         }
       );
-  }
-
-  getAllValidationErrors(response: AppResponse): string[] {
-    return Array.from((this.convertToMap(response.validationErrors)).values());
-  }
-
-  convertToMap(obj: { [key: string]: string }): Map<string, string> {
-    return new Map(Object.entries(obj));
   }
 
   login() {
