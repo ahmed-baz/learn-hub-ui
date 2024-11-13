@@ -31,7 +31,7 @@ export class RegistrationComponent {
             if (200 == res.statusCode) {
               // save the token
               this.registerResponse = res.data as UserRegisterResponse;
-              this.router.navigate(['/activate-account']);
+              this.router.navigate(['/activate-account', this.registerResponse.id]);
             } else {
               this.errorsMessages = this.getAllValidationErrors(res.validationErrors);
             }

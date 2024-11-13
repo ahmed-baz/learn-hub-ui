@@ -6,6 +6,7 @@ import {LoginResponse} from '../models/login-response';
 import {AppResponse} from '../models/app-response';
 import {UserRegisterRequest} from '../models/user-register-request';
 import {UserRegisterResponse} from '../models/user-register-response';
+import {ActivateAccountRequest} from '../models/activate-account-request';
 
 
 @Injectable({
@@ -24,6 +25,11 @@ export class AuthService {
   public register(request: UserRegisterRequest) {
     return this.httpClient
       .post<AppResponse<UserRegisterResponse>>(`${environment.auth_api_url}/register`, request);
+  }
+
+  public activateAccount(request: ActivateAccountRequest) {
+    return this.httpClient
+      .post<AppResponse<void>>(`${environment.auth_api_url}/activate-account`, request);
   }
 
 }

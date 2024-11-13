@@ -19,7 +19,7 @@ const routes: Routes = [
     component: CourseComponent
   },
   {
-    path: 'activate-account',
+    path: 'activate-account/:id',
     component: ActivateAccountComponent
   }
 ];
