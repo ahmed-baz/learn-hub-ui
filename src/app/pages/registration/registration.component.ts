@@ -33,9 +33,7 @@ export class RegistrationComponent {
               this.registerResponse = res.data as UserRegisterResponse;
               this.router.navigate(['/activate-account']);
             } else {
-              for (let msg of res.validationErrors.values()) {
-                this.errorsMessages.push(msg);
-              }
+              this.errorsMessages = this.getAllValidationErrors(res.validationErrors);
             }
           },
           error: (error) => {
@@ -49,4 +47,9 @@ export class RegistrationComponent {
   login() {
     this.router.navigate(['/login']);
   }
+
+  getAllValidationErrors(validationErrors: { [key: string]: string }): string[] {
+    return Array.from(new Map(Object.entries(validationErrors)).values());
+  }
+
 }

@@ -35,9 +35,7 @@ export class LoginComponent {
             this.tokenService.setToken(accessToken);
             this.router.navigate(['/courses']);
           } else {
-            res.validationErrors.forEach((key, value) => {
-              this.errorsMessages.push(value);
-            })
+            this.errorsMessages = this.getAllValidationErrors(res.validationErrors)
           }
         },
         error: (error) => {
@@ -51,15 +49,7 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  /*
-
-    getAllValidationErrors(response: AppResponse<LoginResponse>): string[] {
-      return Array.from((this.convertToMap(response.validationErrors)).values());
-    }
-
-    convertToMap(obj: { [key: string]: string }): Map<string, string> {
-      return new Map(Object.entries(obj));
-    }
-
-   */
+  getAllValidationErrors(validationErrors: { [key: string]: string }): string[] {
+    return Array.from(new Map(Object.entries(validationErrors)).values());
+  }
 }
