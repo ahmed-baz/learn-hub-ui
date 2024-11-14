@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActivateAccountRequest} from '../../services/models/activate-account-request';
 import {AuthService} from '../../services/services/auth.service';
@@ -8,7 +8,7 @@ import {AuthService} from '../../services/services/auth.service';
   templateUrl: './activate-account.component.html',
   styleUrl: './activate-account.component.css'
 })
-export class ActivateAccountComponent {
+export class ActivateAccountComponent implements OnInit {
 
   id: number = 0;
   request: ActivateAccountRequest = {};
