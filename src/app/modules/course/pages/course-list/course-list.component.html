@@ -1,5 +1,7 @@
 <h1>The Courses List</h1>
 <hr>
 <div class="d-flex justify-content-start gap-2 flex-wrap">
-
+  <app-course-card [course]="course" *ngFor="let course of response.list">
+    {{ course.title }}
+  </app-course-card>
 </div>
