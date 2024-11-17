@@ -24,7 +24,7 @@ export class CourseCardComponent {
     if (this._course.courseImage && this._course.courseImage.data) {
       return `data:${this._course.courseImage.type};base64,${this._course.courseImage.data}`;
     }
-    return 'https://source.unsplash.com/user/c_v_r/1900x800';
+    return 'https://www.kasandbox.org/programming-images/avatars/duskpin-tree.png';
   }
 
   /*
