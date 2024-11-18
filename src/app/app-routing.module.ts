@@ -6,6 +6,10 @@ import {ActivateAccountComponent} from './pages/activate-account/activate-accoun
 
 const routes: Routes = [
   {
+    path: '',
+    component: LoginComponent
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
