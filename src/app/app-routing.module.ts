@@ -7,7 +7,7 @@ import {ActivateAccountComponent} from './pages/activate-account/activate-accoun
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    loadChildren: () => import('./modules/course/course.module').then(m => m.CourseModule)
   },
   {
     path: 'login',
