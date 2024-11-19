@@ -27,4 +27,8 @@ export class MenuComponent implements OnInit {
   logout() {
     this.keycloakService.logout()
   }
+
+  manageAccount() {
+    this.keycloakService.manageAccount()
+  }
 }

@@ -48,4 +48,8 @@ export class KeycloakService {
   logout() {
     return this.keycloak.logout();
   }
+
+  manageAccount() {
+    return this.keycloak.accountManagement();
+  }
 }
