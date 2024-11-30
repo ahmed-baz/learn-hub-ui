@@ -1,27 +1,32 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginRequest} from '../../services/models/login-request';
-import {Router} from '@angular/router';
 import {LoginResponse} from '../../services/models/login-response';
-import {TokenService} from '../../services/token/token.service';
-import {AuthService} from '../../services/services/auth.service';
+import {KeycloakService} from '../../services/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginRequest: LoginRequest = {email: '', password: ''};
   loginResponse: LoginResponse = {id: 0, email: '', role: '', accessToken: ''};
   errorsMessages: Array<string> = [];
 
   constructor(
-    private router: Router,
-    private authService: AuthService,
-    private tokenService: TokenService,
+    //private router: Router,
+    //private authService: AuthService,
+    //private tokenService: TokenService,
+    private keycloakService: KeycloakService,
   ) {
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.keycloakService.init()
+    await this.keycloakService.login()
+  }
+
+  /*
   login() {
     this.errorsMessages = [];
     this.authService
@@ -52,4 +57,5 @@ export class LoginComponent {
   getAllValidationErrors(validationErrors: { [key: string]: string }): string[] {
     return Array.from(new Map(Object.entries(validationErrors)).values());
   }
+   */
 }

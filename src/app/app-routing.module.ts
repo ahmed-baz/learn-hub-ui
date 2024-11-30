@@ -7,7 +7,8 @@ import {ActivateAccountComponent} from './pages/activate-account/activate-accoun
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    redirectTo: 'courses',
+    pathMatch: 'full'
   },
   {
     path: 'login',
