@@ -9,6 +9,7 @@ export class Course {
   numberOfHours?: number;
   courseImage?: CourseCoverImage;
   startAt?: string;
+  rate?: number;
   createdAt?: string;
   createdBy?: number;
   lastModifiedAt?: string;
